@@ -1,0 +1,95 @@
+Self-Organizing Map (SOM) for solving the Traveling Salesman Problem
+   
+   Self-Organizing Maps are a type of artificial neural network used for unsupervised learning, 
+   capable of mapping high-dimensional input data into a lower-dimensional (usually 2D) grid 
+of neurons.
+The SOM is typically used for clustering, feature extraction, and dimensionality reduction. 
+However, it can also be adapted to solve combinatorial optimization problems like the 
+Traveling Salesman Problem (TSP).
+
+Adapting SOM to TSP
+    The TSP is a classic problem in optimization, where the goal is to find the shortest possible 
+    route that visits a set of cities exactly once and returns to the origin city. A naive approach 
+    for solving TSP involves brute force, but this becomes computationally infeasible as the number 
+    of cities grows. SOMs as an unsupervised learning technique, can be adapted to find near-optimal 
+    solutions to the TSP through an innovative approach.
+
+HOW THE SOM METHOD CAN BE APPLIED TO TSP
+1. Initializing Neurons
+    
+    In the context of TSP, each city in the problem is represented by a neuron in the SOM grid. 
+    These neurons are organized into a 2D grid, with each neuron corresponding to a potential 
+    location of one of the cities in the problem. The SOM is initialized by randomly assigning 
+    coordinates to the neurons on the grid. These coordinates are analogous to the cities' 
+    locations in a Euclidean space or another relevant distance metric.
+
+Each city (represented as a point in space) is also initialized with an associated position 
+in the SOM grid. These positions will evolve through the training process as the SOM algorithm 
+tries to find a better configuration that minimizes the total distance traveled.
+
+
+2.Neighborhood Function
+    
+    The neighborhood function plays a central role in the SOM's ability to "learn" and organize 
+    the cities. For TSP, the neighborhood function governs how much a neuron (or city) influences 
+    its neighboring neurons during the learning process. A common choice for the neighborhood 
+    function is a Gaussian function, which decreases the influence of a neuron’s neighbors as the 
+    distance between them increases.
+
+When updating the map, the "Best Matching Unit" (BMU)—the neuron whose position most closely 
+matches the current city—becomes the focal point. Neurons within a certain radius of the BMU 
+will be updated to reflect the current city’s position. This update is based on the learning 
+rate and the neighborhood function, ensuring that nearby neurons are also adjusted to improve 
+the overall solution. The idea is that, over time, cities that are spatially close to each other
+ in the problem space will become positioned near each other on the map.
+
+In the case of TSP, the goal is to ensure that cities that are geographically close in the 
+problem space are also mapped to adjacent positions on the SOM grid. This allows the SOM to 
+approximate the tour path as it "learns" to organize the cities in the most efficient order.
+
+
+3.Learning Rate
+    
+    The learning rate is an essential parameter in the SOM algorithm. It controls how much 
+    the neuron weights (positions) are updated during each iteration. For TSP, the learning 
+    rate should start at a relatively high value to allow large adjustments in the early stages 
+    of training. As the training progresses, the learning rate gradually decreases, enabling finer 
+    adjustments as the map begins to stabilize.
+
+The learning rate helps to refine the path between cities, allowing the SOM to "fine-tune" the 
+distances between them. If the learning rate is too high, the neurons may jump around erratically, 
+failing to converge on a solution. On the other hand, if it is too low, the neurons may not move 
+enough to adjust the positions of cities adequately.
+
+
+4.Representing Cities
+    
+    In a TSP scenario, the cities are represented as data points in a Euclidean space, with each 
+    city having a specific location (x, y) on a 2D plane. Each city has a set of coordinates, 
+    which are used to calculate distances between cities. These coordinates will serve as input 
+    to the SOM algorithm. Over time, the positions of the cities in the SOM grid will evolve to 
+    minimize the total distance of the tour.
+
+
+Training Process:
+    
+1.Input Cities to SOM: Initially, the cities are randomly assigned to positions in the SOM grid. 
+Each neuron in the grid will represent a city, but the initial positions are randomly distributed.
+
+2.Finding the BMU (Best Matching Unit): At each step of the algorithm, a city (from the TSP) is selected, 
+and the BMU is found on the map. The BMU is the neuron closest to the city's position based on a 
+distance metric, usually Euclidean distance.
+
+3.Updating the SOM: The BMU and its neighboring neurons are adjusted to move closer to the city's position. 
+This update is done using the neighborhood function and the learning rate. Over time, neurons will shift 
+to reflect the underlying structure of the TSP cities.
+
+4.Iterative Training: This process is repeated for several iterations, with the learning rate gradually 
+decreasing. As the iterations progress, the neurons organize themselves to represent a good approximation 
+of the optimal path between cities.
+
+5.Solution Extraction: After sufficient training, the neurons will be organized such that cities that 
+are geographically close to each other will be placed near each other on the map. The final path (tour) 
+can be extracted by following the sequence of neurons from the start city, visiting each city once, and 
+then returning to the start city. The length of this tour corresponds to the total distance traveled in 
+the TSP.

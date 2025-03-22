@@ -1,0 +1,51 @@
+Graph representation: Adjacency list/Adjacency Matrix
+The given graph can be represented using an Adjacency List or Adjacency Matrix
+
+Adjacency List representation(python code)
+graph = {
+    1: {2: 12, 3: 10, 7: 12},
+    2: {1: 12, 3: 8, 4: 12},
+    3: {1: 10, 2: 8, 4: 11, 5: 3, 7: 9},
+    4: {2: 12, 3: 11, 5: 11},
+    5: {3: 3, 4: 11, 6: 6, 7: 7},
+    6: {5: 6, 7: 9},
+    7: {1: 12, 3: 9, 5: 7, 6: 9}
+}
+
+Adjacency Matrix representation (python code) 
+INF = float('inf')  # Representing no connection
+
+adj_matrix = [
+    [0, 12, 10, INF, INF, INF, 12],  # Node 1
+    [12, 0, 8, 12, INF, INF, INF],   # Node 2
+    [10, 8, 0, 11, 3, INF, 9],       # Node 3
+    [INF, 12, 11, 0, 11, INF, INF],  # Node 4
+    [INF, INF, 3, 11, 0, 6, 7],      # Node 5
+    [INF, INF, INF, INF, 6, 0, 9],   # Node 6
+    [12, INF, 9, INF, 7, 9, 0]       # Node 7
+]
+
+Justification for;
+1. Adjacency List
+    Efficient for storing sparse graphs (fewer edges compared to nodes).
+    Allows quick lookup of neighbors and their distances.
+    Reduces memory usage since only existing edges are stored.
+
+2. Adjacency Matrix
+    More suitable for dense graphs where most nodes are connected.
+    Allows constant-time (O(1)) lookup of distances between any two nodes.
+    requires more memory (O(N^2) space complexity) even for missing edges.
+
+Since the graph has relatively few edges compared to a fully connected graph, an Adjacency List is the better choice as it optimally balances efficiency and lookup speed.
+
+
+Problem Setup: TSP
+Objective:
+ The goal of the Traveling Salesman Problem (TSP) is to find the shortest possible route that:
+     Visits each city exactly once.
+     Returns to the starting city with the minimum travel distance.
+
+Assumptions:
+1. The graph is fully connected, meaning there exists a valid path between any two cities.
+2. The edges represent symmetric (bidirectional) travel costs ie the distance from city A to B is the same as as B to A.
+3. The starting city is City 1 and the route must end at City 1 after visiting all other cities.
